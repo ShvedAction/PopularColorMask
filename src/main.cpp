@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <opencv2/highgui.hpp>
 #include "utilities/rgb_mask.h"
 #include "utilities/hsv_mask.h"
 
