@@ -6,5 +6,7 @@ set(CMAKE_CXX_STANDARD 11)
 find_package( OpenCV REQUIRED )
 include_directories( ${OpenCV_INCLUDE_DIRS} )
 
-add_executable( PopColor src/main.cpp )
+include_directories( src/utilities )
+set( SRC_LIST src/main.cpp src/utilities/rgb_mask.cpp )
+add_executable( PopColor ${SRC_LIST} )
 target_link_libraries( PopColor ${OpenCV_LIBS} )
