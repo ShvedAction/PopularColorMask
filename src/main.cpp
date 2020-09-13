@@ -5,22 +5,23 @@
 
 using namespace cv;
 
+/**
+ * argv[0] - path to image
+ * argv[1] - window value for tresholding (in float)
+*/
 int main(int argc, char **argv)
 {
     cv::Mat src;
-    if (argc != 2 || !(src = cv::imread(argv[1], 1)).data)
+    if (argc != 3 || !(src = cv::imread(argv[1], 1)).data)
         return -1;
 
+    float window = atof(argv[2]);
+
     RGBColor popColor = RGBMask::popColorFor(src);
-    cv::Mat mask = RGBMask::buildMask(src, popColor, 0.1f);
-    printf("popular color: %d, %d, %d\n", popColor.x, popColor.y, popColor.z);
-    namedWindow("RGB mask", 1);
-    imshow("RGB mask", mask);
+    cv::Mat mask = RGBMask::buildMask(src, popColor, window);
+    imwrite("out/rgb_mask.png", mask);
 
-    cv::Mat hsvMask = HSVMask::buildMask(src, 0.03f);
-    namedWindow("HSV mask", 1);
-    imshow("HSV mask", hsvMask);
-    waitKey();
-
+    cv::Mat hsvMask = HSVMask::buildMask(src, window);
+    imwrite("out/hsv_mask.png", hsvMask);
     return 0;
 }
