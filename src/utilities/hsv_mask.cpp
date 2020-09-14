@@ -8,7 +8,7 @@ Mat HSVMask::buildMask(Mat &rgb, float window)
     cvtColor(rgb, hsv, COLOR_BGR2HSV);
 
     float hranges[] = {0, 180};
-    const float *ranges[] = { hranges} ;
+    const float *ranges[] = { hranges };
     int histSize[] = { static_cast<int>(180.0f * (1.0f - window)) };
     int channels[] = { 0 };
     MatND hist;
